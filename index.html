@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Especial Dia dos Namorados | Atelier MDF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        .font-romance { font-family: 'Great Vibes', cursive; }
+        
+        .bg-valentines {
+            background: linear-gradient(rgba(20, 0, 0, 0.9), rgba(40, 0, 0, 0.95)), 
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .petalas {
+            position: fixed;
+            top: -10%;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            color: #ff4d4d;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .produto-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .label-medida {
+            background: #ff3333;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .label-indisponivel {
+            background: #4b5563;
+            color: #d1d5db;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body class="bg-valentines min-h-screen text-white">
+
+    <div id="petals-container"></div>
+
+    <header class="relative z-10 pt-20 pb-12 px-4 text-center max-w-4xl mx-auto">
+        <h1 class="font-romance text-6xl md:text-8xl text-red-500 mb-6">Coleção Namorados</h1>
+        
+        <div class="space-y-4 mb-8">
+            <p class="text-xl md:text-2xl text-gray-200 font-light leading-relaxed">
+                Surpreenda quem você ama com um detalhe que fala por si. <br>
+                <span class="text-red-500 font-bold italic text-2xl md:text-3xl">Apenas R$ 15,00 para criar um momento eterno.</span>
+            </p>
+            
+            <p class="text-2xl md:text-4xl text-gray-300 italic font-romance px-4 leading-snug">
+                "Não é apenas uma caixa, é o lugar onde você guarda a nossa história."
+            </p>
+
+            <p class="text-sm md:text-base text-red-600 font-black uppercase tracking-[0.3em] animate-pulse pt-4">
+                🔥 OFERTA ESPECIAL DIA DOS NAMORADOS: ESTOQUE LIMITADO!
+            </p>
+        </div>
+        
+        <div class="w-32 h-1 bg-red-600 mx-auto"></div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <script>
+            const WHATSAPP_NUMBER = "5531985867496";
+            const PRECO_VALOR = 15;
+            const DIMENSAO = "13x13x7cm";
+
+            // Extensões corrigidas para .png minúsculo e modelo 25 removido definitivamente
+            const produtos = [
+                { id: "19", nome: "Caixa Te Amo com Coração Vazado", img: "19.png", disponivel: true },
+                { id: "20", nome: "Caixa Feliz Dia dos Namorados", img: "20.png", disponivel: true },
+                { id: "21", nome: "Caixa Love com Mini Corações", img: "21.png", disponivel: true },
+                { id: "22", nome: "Caixa Te Amo Vazado Bold", img: "22.png", disponivel: true },
+                { id: "23", nome: "Caixa Eu Te Amo Corações Font", img: "23.png", disponivel: true },
+                { id: "24", nome: "Caixa Eu Te Amo Cursivo Premium", img: "24.png", disponivel: true },
+                { id: "01", nome: "Caixa Amor Script", img: "1.png", disponivel: false },
+                { id: "02", nome: "Caixa Te Amo Corações", img: "2.png", disponivel: false },
+                { id: "03", nome: "Caixa Feliz Dia Namorados", img: "3.png", disponivel: false },
+                { id: "04", nome: "Caixa LOVE Vazado", img: "4.png", disponivel: false },
+                { id: "05", nome: "Caixa Especial Texto", img: "5.png", disponivel: false },
+                { id: "06", nome: "Caixa Corações Interlaçados", img: "6.png", disponivel: false },
+                { id: "07", nome: "Caixa Te Amo Cursivo", img: "7.png", disponivel: false },
+                { id: "08", nome: "Caixa Coração Filigrana", img: "8.png", disponivel: false },
+                { id: "09", nome: "Caixa LOVE Texto e Corações", img: "9.png", disponivel: false },
+                { id: "10", nome: "Caixa Amor Cursivo", img: "10.png", disponivel: false },
+                { id: "11", nome: "Caixa Ursinho Coração", img: "11.png", disponivel: false },
+                { id: "12", nome: "Caixa Coração Central", img: "12.png", disponivel: false },
+                { id: "13", nome: "Caixa Você Completa Script", img: "13.png", disponivel: false },
+                { id: "14", nome: "Caixa I (Heart) YOU Vazado", img: "14.png", disponivel: false },
+                { id: "15", nome: "Caixa Para Meu Amor Texto", img: "15.png", disponivel: false },
+                { id: "16", nome: "Caixa Te Amo! Pequenos", img: "16.png", disponivel: false },
+                { id: "17", nome: "Caixa Amor Coração Texturizado", img: "17.png", disponivel: false },
+                { id: "18", nome: "Caixa Duplo Coração Vazado", img: "18.png", disponivel: false }
+            ];
+
+            document.write(produtos.map(p => {
+                if (p.disponivel) {
+                    return `
+                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl">
+                            <div class="relative bg-white/5 p-2">
+                                <img src="${p.img}" alt="${p.nome}" class="w-full h-80 object-contain">
+                                <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 rounded border border-red-500 font-bold text-sm text-red-500">
+                                    MOD: ${p.id}
+                                </div>
+                            </div>
+                            
+                            <div class="p-6 flex flex-col flex-grow text-center">
+                                <h2 class="text-xl font-bold uppercase mb-2">${p.nome}</h2>
+                                <div class="mb-4">
+                                    <span class="label-medida">${DIMENSAO}</span>
+                                </div>
+                                
+                                <div class="mt-auto">
+                                    <div class="text-3xl font-black mb-6">R$ ${PRECO_VALOR},00</div>
+                                    
+                                    <div class="flex items-center justify-center space-x-6 mb-6 bg-black/40 py-2 rounded-lg border border-white/10">
+                                        <button onclick="alterarQtd(this, -1)" class="text-2xl font-bold hover:text-red-500 transition">-</button>
+                                        <span class="quantidade font-bold text-xl">1</span>
+                                        <button onclick="alterarQtd(this, 1)" class="text-2xl font-bold hover:text-red-500 transition">+</button>
+                                    </div>
+
+                                    <button onclick="gerarPedido(this)" class="w-full bg-red-600 hover:bg-white hover:text-red-600 text-white font-black py-4 rounded-xl transition-all duration-300 uppercase tracking-widest text-xs">
+                                        🌹 Encomendar Modelo ${p.id}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    return `
+                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl opacity-60">
+                            <div class="relative bg-white/5 p-2 mb-4">
+                                <img src="${p.img}" alt="${p.nome}" class="w-full h-80 object-contain grayscale">
+                                <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 rounded border border-gray-500 font-bold text-sm text-gray-400">
+                                    MOD: ${p.id}
+                                </div>
+                            </div>
+                            
+                            <div class="p-6 flex flex-col flex-grow text-center">
+                                <h2 class="text-xl font-bold uppercase text-gray-400 mb-2">${p.nome}</h2>
+                                <div class="mb-6">
+                                    <span class="label-indisponivel">INDISPONÍVEL</span>
+                                </div>
+                                
+                                <div class="mt-auto">
+                                    <button disabled class="w-full bg-gray-700 text-gray-400 font-black py-4 rounded-xl uppercase tracking-widest text-xs cursor-not-allowed">
+                                        ❌ Produto Esgotado
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }).join(''));
+
+            const container = document.getElementById('petals-container');
+            for (let i = 0; i < 20; i++) {
+                const petala = document.createElement('div');
+                petala.className = 'petalas';
+                petala.innerHTML = '❤';
+                petala.style.left = Math.random() * 100 + 'vw';
+                petala.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                petala.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                container.appendChild(petala);
+            }
+
+            function alterarQtd(elemento, delta) {
+                const card = elemento.closest('.produto-card');
+                const displayQtd = card.querySelector('.quantidade');
+                if (!displayQtd) return;
+                let qtdAtual = parseInt(displayQtd.innerText);
+                qtdAtual = Math.max(1, qtdAtual + delta);
+                displayQtd.innerText = qtdAtual;
+            }
+
+            function gerarPedido(elemento) {
+                const card = elemento.closest('.produto-card');
+                const nome = card.querySelector('h2').innerText;
+                const id = card.querySelector('.absolute').innerText.replace('MOD: ', '');
+                const displayQtd = card.querySelector('.quantidade');
+                const qtd = displayQtd ? displayQtd.innerText : "1";
+                const total = (parseInt(qtd) * PRECO_VALOR).toFixed(2).replace('.', ',');
+
+                const msg = `🌹 *PEDIDO ESPECIAL - NAMORADOS* 🌹\n\n` +
+                            `*Modelo:* ${id} - ${nome}\n` +
+                            `*Medida:* ${DIMENSAO}\n` +
+                            `*Quantidade:* ${qtd}\n` +
+                            `*Total:* R$ ${total}\n\n` +
+                            `Gostaria de garantir este presente!`;
+
+                window.open(`https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(msg)}`, '_blank');
+            }
+        </script>
+    </main>
+
+    <footer class="mt-20 text-center pb-10 border-t border-red-900/30 pt-10 px-4">
+        <p class="font-romance text-4xl text-red-500">Atelier de Memórias</p>
+        <p class="text-gray-500 text-[10px] uppercase tracking-[0.4em] mt-2">Personalizando momentos únicos • 31 98586-7496</p>
+    </footer>
+
+</body>
+</html>
