@@ -10,6 +10,14 @@
         body { font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         .font-romance { font-family: 'Great Vibes', cursive; }
         
+        /* Estilo Ouro Premium para os cards */
+        .gold-text-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border { border: 1px solid #bf953f; }
+        
         .bg-valentines {
             background: linear-gradient(rgba(20, 0, 0, 0.9), rgba(40, 0, 0, 0.95)), 
                         url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=1920');
@@ -36,26 +44,7 @@
         .produto-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 77, 77, 0.3);
             transition: all 0.4s ease;
-        }
-
-        .label-medida {
-            background: #ff3333;
-            color: white;
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-weight: 800;
-            font-size: 13px;
-        }
-
-        .label-indisponivel {
-            background: #4b5563;
-            color: #d1d5db;
-            padding: 2px 10px;
-            border-radius: 4px;
-            font-weight: 800;
-            font-size: 13px;
         }
     </style>
 </head>
@@ -77,7 +66,7 @@
             </p>
 
             <p class="text-sm md:text-base text-red-600 font-black uppercase tracking-[0.3em] animate-pulse pt-4">
-                🔥 OFERTA ESPECIAL DIA DOS NAMORADOS: ESTOQUE LIMITADO!
+                🔥 OFERTA ESPECIAL DIA DOS NAMORADOS: FAÇA JÁ A SUA ENCOMENDA!
             </p>
         </div>
         
@@ -90,7 +79,6 @@
             const PRECO_VALOR = 15;
             const DIMENSAO = "13x13x7cm";
 
-            // Extensões corrigidas para .png minúsculo e modelo 25 removido definitivamente
             const produtos = [
                 { id: "19", nome: "Caixa Te Amo com Coração Vazado", img: "19.png", disponivel: true },
                 { id: "20", nome: "Caixa Feliz Dia dos Namorados", img: "20.png", disponivel: true },
@@ -121,30 +109,30 @@
             document.write(produtos.map(p => {
                 if (p.disponivel) {
                     return `
-                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl">
+                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl gold-border">
                             <div class="relative bg-white/5 p-2">
                                 <img src="${p.img}" alt="${p.nome}" class="w-full h-80 object-contain">
-                                <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 rounded border border-red-500 font-bold text-sm text-red-500">
+                                <div class="absolute top-4 left-4 bg-black px-3 py-1 rounded border border-[#bf953f] font-bold text-sm text-[#bf953f]">
                                     MOD: ${p.id}
                                 </div>
                             </div>
                             
                             <div class="p-6 flex flex-col flex-grow text-center">
-                                <h2 class="text-xl font-bold uppercase mb-2">${p.nome}</h2>
+                                <h2 class="text-xl font-bold uppercase mb-2 gold-text-gradient">${p.nome}</h2>
                                 <div class="mb-4">
-                                    <span class="label-medida">${DIMENSAO}</span>
+                                    <span class="bg-[#bf953f] text-black px-3 py-1 rounded font-bold text-sm">${DIMENSAO}</span>
                                 </div>
                                 
                                 <div class="mt-auto">
-                                    <div class="text-3xl font-black mb-6">R$ ${PRECO_VALOR},00</div>
+                                    <div class="text-3xl font-black mb-6 gold-text-gradient">R$ ${PRECO_VALOR},00</div>
                                     
-                                    <div class="flex items-center justify-center space-x-6 mb-6 bg-black/40 py-2 rounded-lg border border-white/10">
-                                        <button onclick="alterarQtd(this, -1)" class="text-2xl font-bold hover:text-red-500 transition">-</button>
-                                        <span class="quantidade font-bold text-xl">1</span>
-                                        <button onclick="alterarQtd(this, 1)" class="text-2xl font-bold hover:text-red-500 transition">+</button>
+                                    <div class="flex items-center justify-center space-x-6 mb-6 bg-black/40 py-2 rounded-lg border border-[#bf953f]/30">
+                                        <button onclick="alterarQtd(this, -1)" class="text-2xl font-bold hover:text-[#bf953f] transition">-</button>
+                                        <span class="quantidade font-bold text-xl text-white">1</span>
+                                        <button onclick="alterarQtd(this, 1)" class="text-2xl font-bold hover:text-[#bf953f] transition">+</button>
                                     </div>
 
-                                    <button onclick="gerarPedido(this)" class="w-full bg-red-600 hover:bg-white hover:text-red-600 text-white font-black py-4 rounded-xl transition-all duration-300 uppercase tracking-widest text-xs">
+                                    <button onclick="gerarPedido(this)" class="w-full border border-[#bf953f] text-[#bf953f] hover:bg-[#bf953f] hover:text-black font-black py-4 rounded-xl transition-all duration-300 uppercase tracking-widest text-xs">
                                         🌹 Encomendar Modelo ${p.id}
                                     </button>
                                 </div>
@@ -153,10 +141,10 @@
                     `;
                 } else {
                     return `
-                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl opacity-60">
+                        <div class="produto-card rounded-2xl overflow-hidden flex flex-col h-full shadow-2xl opacity-60 border border-gray-700">
                             <div class="relative bg-white/5 p-2 mb-4">
                                 <img src="${p.img}" alt="${p.nome}" class="w-full h-80 object-contain grayscale">
-                                <div class="absolute top-4 left-4 bg-black/80 px-3 py-1 rounded border border-gray-500 font-bold text-sm text-gray-400">
+                                <div class="absolute top-4 left-4 bg-black px-3 py-1 rounded border border-gray-500 font-bold text-sm text-gray-400">
                                     MOD: ${p.id}
                                 </div>
                             </div>
@@ -164,11 +152,11 @@
                             <div class="p-6 flex flex-col flex-grow text-center">
                                 <h2 class="text-xl font-bold uppercase text-gray-400 mb-2">${p.nome}</h2>
                                 <div class="mb-6">
-                                    <span class="label-indisponivel">INDISPONÍVEL</span>
+                                    <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded font-bold text-sm">INDISPONÍVEL</span>
                                 </div>
                                 
                                 <div class="mt-auto">
-                                    <button disabled class="w-full bg-gray-700 text-gray-400 font-black py-4 rounded-xl uppercase tracking-widest text-xs cursor-not-allowed">
+                                    <button disabled class="w-full bg-gray-800 text-gray-500 font-black py-4 rounded-xl uppercase tracking-widest text-xs cursor-not-allowed">
                                         ❌ Produto Esgotado
                                     </button>
                                 </div>
